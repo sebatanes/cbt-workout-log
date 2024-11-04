@@ -122,7 +122,7 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
         <CardTitle>Registrar Sesión de Estudio</CardTitle>
-        <CardDescription>Registra tu viaje de aprendizaje con insights cognitivos</CardDescription>
+        <CardDescription>Registra tu viaje de aprendizaje con insights cognitivos </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex justify-between items-center mb-4">
