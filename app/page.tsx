@@ -12,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Download, Upload } from "lucide-react";
 import { StudyEntryFormData } from "@/lib/types";
+import { Strategies } from "@/components/strategies";
 
 export default function Home() {
   const { entries, addEntry, updateEntry, deleteEntry, exportData, importData } = useStudyEntries();
@@ -57,8 +58,9 @@ export default function Home() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="form">Nueva Entrada</TabsTrigger>
+          <TabsTrigger value="strategies">Estrategias</TabsTrigger>
           <TabsTrigger value="entries">Historial</TabsTrigger>
           <TabsTrigger value="timeline">Línea de Tiempo</TabsTrigger>
           <TabsTrigger value="stats">Analíticas</TabsTrigger>
@@ -75,6 +77,10 @@ export default function Home() {
             onUpdate={(id: string, data: Partial<StudyEntryFormData>) => updateEntry(Number(id), data)}
             onDelete={(id: string) => deleteEntry(Number(id))}
           />
+        </TabsContent>
+        
+        <TabsContent value="strategies" className="mt-6">
+          <Strategies />
         </TabsContent>
         <TabsContent value="timeline" className="mt-6">
           <HistoryView entries={entries} />
