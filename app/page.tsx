@@ -6,7 +6,6 @@ import { StudyForm } from "@/components/study-form";
 import { StudyEntries } from "@/components/study-entries";
 import { StatsView } from "@/components/stats-view";
 import { HistoryView } from "@/components/history-view";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
@@ -15,15 +14,8 @@ import { StudyEntryFormData } from "@/lib/types";
 import { Strategies } from "@/components/strategies";
 
 export default function Home() {
-  const { entries, addEntry, updateEntry, deleteEntry, exportData, importData } = useStudyEntries();
+  const { entries, addEntry, updateEntry, deleteEntry, exportData } = useStudyEntries();
   const [activeTab, setActiveTab] = useState("form");
-
-  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      importData(file);
-    }
-  };
 
   return (
     <main className="container mx-auto py-6 px-4 space-y-8">
@@ -34,26 +26,10 @@ export default function Home() {
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <Input
-            type="file"
-            accept=".json"
-            onChange={handleImport}
-            className="hidden"
-            id="import-file"
-          />
           <Button variant="outline" onClick={exportData}>
             <Download className="mr-2 h-4 w-4" />
             Exportar
           </Button>
-          <label htmlFor="import-file">
-            <Button variant="outline" asChild>
-              <span>
-                <Upload className="mr-2 h-4 w-4" />
-                Importar
-              </span>
-            </Button>
-          </label>
-          <ThemeToggle />
         </div>
       </div>
 
