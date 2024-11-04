@@ -43,13 +43,10 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
       alert("Pomodoro session completed!");
     }
 
-    // Update the document title with the remaining time
-    document.title = `Timer: ${formatTime(timeLeft)}`;
-
     return () => {
       clearInterval(timer);
     };
-  }, [isRunning, timeLeft]);
+  }, [isRunning]);
 
   const toggleTimer = () => {
     setIsRunning(!isRunning);
