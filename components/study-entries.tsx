@@ -112,7 +112,7 @@ export function StudyEntries({ entries, onUpdate, onDelete }: StudyEntriesProps)
               </div>
 
               <div className="space-y-2">
-                <h4 className="font-medium">Soluciones</h4>
+                <h4 className="font-medium">Refuerzo positivo</h4>
                 <p className="text-sm text-muted-foreground">{entry.solutions}</p>
               </div>
             </div>

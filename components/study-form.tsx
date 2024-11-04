@@ -190,10 +190,10 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
               name="solutions"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Soluciones Aplicadas</FormLabel>
+                  <FormLabel>Refuerzo positivo</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="¿Cómo superaste los desafíos?"
+                      placeholder="¿Qué aprendí en esta sesión?"
                       className="min-h-[100px]"
                       {...field}
                     />
