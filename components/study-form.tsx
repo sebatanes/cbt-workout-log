@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { StudyEntryFormData } from "@/lib/types";
 import { useState, useEffect } from "react";
+import { FaTrophy } from 'react-icons/fa';
 
 const formSchema = z.object({
   topic: z.string().min(2, "El tema debe tener al menos 2 caracteres"),
@@ -31,6 +32,7 @@ interface StudyFormProps {
 export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
   const [timeLeft, setTimeLeft] = useState(initialData?.duration ? initialData.duration * 60 : 30 * 60);
   const [isRunning, setIsRunning] = useState(false);
+  const [showCongratulations, setShowCongratulations] = useState(false);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -82,6 +84,40 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
     setTimeLeft(value * 60);
   };
 
+  const handleSubmit = (data: StudyEntryFormData) => {
+    setShowCongratulations(true);
+    setTimeout(() => {
+      setShowCongratulations(false);
+      onSubmit(data);
+    }, 5000);
+  };
+
+  const positiveMessages = [
+    "¡Guardaste tu entrada con éxito, genio!",
+    "¡Sos un capo por dedicar tiempo a tu aprendizaje!",
+    "¡A celebrar tus logros, cada paso cuenta!",
+    "¡Dale que va, el esfuerzo vale la pena!",
+    "¡Acordate de felicitarte en voz alta, vos te lo merecés!",
+    "¡Estás avanzando a lo grande, seguí así!",
+    "¡Sos un crack por no bajar los brazos!",
+    "¡Cada día estás más cerca de tus metas, qué fenómeno!",
+    "¡Muy bien, seguí sumando esfuerzo, campeón!",
+    "¡Qué orgullo verte progresar, no pares!",
+    "¡Tu dedicación es inspiradora, a seguir metiéndole!",
+    "¡Mirá lo lejos que llegaste, seguilo disfrutando!",
+    "¡Sos un ejemplo de constancia, seguí así!",
+    "¡Vas a lograr cosas grandes, seguí así!",
+    "¡Cada pequeño avance suma, no te detengas!",
+    "¡Tus ganas son contagiosas, hacés que valga la pena!",
+    "¡Todo el esfuerzo está dando frutos, no aflojes!",
+    "¡Estás demostrando lo que valés, qué orgullo!",
+    "¡Es increíble lo que estás logrando, vamos viejo!"
+  ];
+
+
+
+  const randomMessage = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
@@ -100,8 +136,20 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
             </Button>
           </div>
         </div>
+        {showCongratulations && (
+          <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-90 animate-fade-in-out">
+            <div className="bg-black rounded-lg shadow-lg p-8 text-center relative">
+              <div className="absolute top-0 left-0 right-0 -mt-6">
+                <FaTrophy className="mx-auto w-16 h-16 text-yellow-500" />
+              </div>
+              <h1 className="text-5xl font-bold text-white">¡Felicidades!</h1>
+              <p className="text-lg text-gray-300 mt-2">{randomMessage}</p>
+              <h3 className="text-md text-gray-400 mt-4">¡Acordate de felicitarte en voz alta, vos te lo merecés!</h3>
+            </div>
+          </div>
+        )}
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
             <FormField
               control={form.control}
               name="topic"
@@ -151,15 +199,15 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
                           <SelectItem key={value} value={value.toString()}>
                             {value === 1 ? "😔" :
-                             value === 2 ? "🙁" :
-                             value === 3 ? "😐" :
-                             value === 4 ? "🙂" :
-                             value === 5 ? "😊" :
-                             value === 6 ? "😃" :
-                             value === 7 ? "😄" :
-                             value === 8 ? "😁" :
-                             value === 9 ? "😍" :
-                             value === 10 ? "🥳" : "😐"}
+                              value === 2 ? "🙁" :
+                                value === 3 ? "😐" :
+                                  value === 4 ? "🙂" :
+                                    value === 5 ? "😊" :
+                                      value === 6 ? "😃" :
+                                        value === 7 ? "😄" :
+                                          value === 8 ? "😁" :
+                                            value === 9 ? "😍" :
+                                              value === 10 ? "🥳" : "😐"} {value}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -185,15 +233,15 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
                           <SelectItem key={value} value={value.toString()}>
                             {value === 1 ? "😔" :
-                             value === 2 ? "🙁" :
-                             value === 3 ? "😐" :
-                             value === 4 ? "🙂" :
-                             value === 5 ? "😊" :
-                             value === 6 ? "😃" :
-                             value === 7 ? "😄" :
-                             value === 8 ? "😁" :
-                             value === 9 ? "😍" :
-                             value === 10 ? "🥳" : "😐"}
+                              value === 2 ? "🙁" :
+                                value === 3 ? "😐" :
+                                  value === 4 ? "🙂" :
+                                    value === 5 ? "😊" :
+                                      value === 6 ? "😃" :
+                                        value === 7 ? "😄" :
+                                          value === 8 ? "😁" :
+                                            value === 9 ? "😍" :
+                                              value === 10 ? "🥳" : "😐"} {value}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -248,7 +296,7 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
                   <FormLabel>Refuerzo positivo</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="¿Qué aprendí en esta sesión?"
+                      placeholder="¿Qué aprendí en esta sesión? ¿Qué hice bien?"
                       className="min-h-[100px]"
                       {...field}
                     />

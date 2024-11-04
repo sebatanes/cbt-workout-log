@@ -45,9 +45,9 @@ export function Timeline({ entries }: TimelineProps) {
                 <h4 className="font-semibold">{entry.topic}</h4>
                 <div className="flex items-center gap-2 text-sm">
                   <span>Mood</span>
-                  <span className="text-muted-foreground">{getMoodEmoji(entry.mood_before)}</span>
+                  <span className="text-muted-foreground">{entry.mood_before} {getMoodEmoji(entry.mood_before)}</span>
                   <ArrowRight className="h-3 w-3" />
-                  <span className="text-muted-foreground">{getMoodEmoji(entry.mood_after)}</span>
+                  <span className="text-muted-foreground">{entry.mood_after} {getMoodEmoji(entry.mood_after)}</span>
                 </div>
                 {entry.thoughts && (
                   <p className="text-sm text-muted-foreground line-clamp-2">

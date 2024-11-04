@@ -96,7 +96,7 @@ export function StudyEntries({ entries, onUpdate, onDelete }: StudyEntriesProps)
                 <div className="flex items-center gap-2">
                   <BarChart className="h-4 w-4" />
                   <span>
-                    Estado de Ánimo: {getMoodEmoji(entry.mood_before)} → {getMoodEmoji(entry.mood_after)}
+                    Estado de Ánimo: {getMoodEmoji(entry.mood_before)} {entry.mood_before} → {getMoodEmoji(entry.mood_after)} {entry.mood_after}
                   </span>
                 </div>
               </div>
