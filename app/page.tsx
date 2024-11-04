@@ -19,29 +19,28 @@ export default function Home() {
 
   return (
     <main className="container mx-auto py-6 px-4 space-y-8">
-      <div className="flex items-center justify-between">
-        <div>
+      <div className="flex flex-col md:flex-row items-center justify-between">
+        <div className="text-center md:text-left">
           <h1 className="text-4xl font-bold">Diario de Estudio CBT</h1>
-          <p className="text-muted-foreground">Registro sesión a sesión
-          </p>
+          <p className="text-muted-foreground">Registro sesión a sesión</p>
         </div>
-        <div className="flex items-center gap-4">
-          <Button variant="outline" onClick={exportData}>
+        <div className="flex items-center gap-4 mt-4 md:mt-0">
+          <Button variant="outline" onClick={exportData} className="hidden md:flex">
             <Download className="mr-2 h-4 w-4" />
             Exportar
           </Button>
         </div>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-5">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4 mb-4 md:mt-0">
+        <TabsList className="tabs-list grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
           <TabsTrigger value="form">Nueva Entrada</TabsTrigger>
           <TabsTrigger value="strategies">Estrategias</TabsTrigger>
           <TabsTrigger value="entries">Historial</TabsTrigger>
           <TabsTrigger value="timeline">Línea de Tiempo</TabsTrigger>
           <TabsTrigger value="stats">Analíticas</TabsTrigger>
         </TabsList>
-        <TabsContent value="form" className="mt-6">
+        <TabsContent value="form" className="tabs-content mt-6">
           <StudyForm onSubmit={(data) => {
             addEntry(data);
             setActiveTab("entries");
