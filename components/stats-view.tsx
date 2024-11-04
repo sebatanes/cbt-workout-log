@@ -20,6 +20,8 @@ interface StatsViewProps {
 export function StatsView({ entries }: StatsViewProps) {
   const stats = useMemo(() => {
     const totalTime = entries.reduce((acc, entry) => acc + entry.duration, 0);
+    const hours = Math.floor(totalTime / 60);
+    const minutes = totalTime % 60;
     const avgMoodImprovement =
       entries.reduce(
         (acc, entry) => acc + (entry.mood_after - entry.mood_before),
@@ -36,7 +38,7 @@ export function StatsView({ entries }: StatsViewProps) {
 
     return {
       totalSessions: entries.length,
-      totalTime,
+      totalTime: { hours, minutes },
       avgMoodImprovement,
       moodData,
     };
@@ -60,7 +62,9 @@ export function StatsView({ entries }: StatsViewProps) {
             <Clock className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalTime} min</div>
+            <div className="text-2xl font-bold">
+              {stats.totalTime.hours}h {stats.totalTime.minutes}m
+            </div>
           </CardContent>
         </Card>
         <Card>
