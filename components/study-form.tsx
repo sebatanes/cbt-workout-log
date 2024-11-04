@@ -46,10 +46,10 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
     return () => {
       clearInterval(timer);
     };
-  }, [isRunning]);
+  }, [isRunning, timeLeft]);
 
   const toggleTimer = () => {
-    setIsRunning(!isRunning);
+    setIsRunning((prev) => !prev);
   };
 
   const resetTimer = () => {
