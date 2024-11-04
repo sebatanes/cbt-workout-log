@@ -111,7 +111,16 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
     "¡Tus ganas son contagiosas, hacés que valga la pena!",
     "¡Todo el esfuerzo está dando frutos, no aflojes!",
     "¡Estás demostrando lo que valés, qué orgullo!",
-    "¡Es increíble lo que estás logrando, vamos viejo!"
+    "¡Es increíble lo que estás logrando, vamos viejo!",
+    "¡Cada día es una nueva oportunidad para aprender!",
+    "¡Tu esfuerzo está dando resultados, sigue así!",
+    "¡Eres un ejemplo de perseverancia, no te rindas!",
+    "¡Cada paso que das te acerca más a tus sueños!",
+    "¡Estás construyendo un futuro brillante, sigue adelante!",
+    "¡Cada logro, por pequeño que sea, cuenta!",
+    "¡Tu compromiso es inspirador, sigue así!",
+    "¡Estás haciendo un gran trabajo, no te detengas!",
+    "¡Tu esfuerzo y dedicación son dignos de reconocimiento!"
   ];
 
 
