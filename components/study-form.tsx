@@ -46,7 +46,9 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
     // Update the document title with the remaining time
     document.title = `Timer: ${formatTime(timeLeft)}`;
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+    };
   }, [isRunning, timeLeft]);
 
   const toggleTimer = () => {
