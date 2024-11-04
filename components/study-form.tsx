@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { StudyEntryFormData } from "@/lib/types";
+import { useState, useEffect } from "react";
 
 const formSchema = z.object({
   topic: z.string().min(2, "El tema debe tener al menos 2 caracteres"),
@@ -28,6 +29,41 @@ interface StudyFormProps {
 }
 
 export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
+  const [timeLeft, setTimeLeft] = useState(initialData?.duration ? initialData.duration * 60 : 30 * 60);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (isRunning && timeLeft > 0) {
+      timer = setInterval(() => {
+        setTimeLeft((prevTime) => prevTime - 1);
+      }, 1000);
+    } else if (timeLeft === 0) {
+      setIsRunning(false);
+      alert("Pomodoro session completed!");
+    }
+
+    // Update the document title with the remaining time
+    document.title = `Timer: ${formatTime(timeLeft)}`;
+
+    return () => clearInterval(timer);
+  }, [isRunning, timeLeft]);
+
+  const toggleTimer = () => {
+    setIsRunning(!isRunning);
+  };
+
+  const resetTimer = () => {
+    setIsRunning(false);
+    setTimeLeft(form.getValues("duration") * 60);
+  };
+
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+  };
+
   const form = useForm<StudyEntryFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,6 +78,11 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
     },
   });
 
+  const handleDurationChange = (value: number) => {
+    form.setValue("duration", value);
+    setTimeLeft(value * 60);
+  };
+
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
@@ -49,6 +90,17 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
         <CardDescription>Registra tu viaje de aprendizaje con insights cognitivos</CardDescription>
       </CardHeader>
       <CardContent>
+        <div className="flex justify-between items-center mb-4">
+          <span>Pomodoro Timer: {formatTime(timeLeft)}</span>
+          <div>
+            <Button onClick={toggleTimer} className="mr-2">
+              {isRunning ? "Pausar" : "Iniciar"}
+            </Button>
+            <Button onClick={resetTimer}>
+              Reiniciar
+            </Button>
+          </div>
+        </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
@@ -72,7 +124,11 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
                 <FormItem>
                   <FormLabel>Duración (minutos)</FormLabel>
                   <FormControl>
-                    <Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value))} />
+                    <Input
+                      type="number"
+                      {...field}
+                      onChange={e => handleDurationChange(parseInt(e.target.value))}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

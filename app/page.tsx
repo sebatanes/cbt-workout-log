@@ -21,7 +21,7 @@ export default function Home() {
     <main className="container mx-auto py-6 px-4 space-y-8">
       <div className="flex flex-col md:flex-row items-center justify-between">
         <div className="text-center md:text-left">
-          <h1 className="text-4xl font-bold">Diario de Estudio CBT</h1>
+          <h1 className="text-4xl font-bold">Diario de Estudio TCC</h1>
           <p className="text-muted-foreground">Registro sesión a sesión</p>
         </div>
         <div className="flex items-center gap-4 mt-4 md:mt-0">
