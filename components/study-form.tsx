@@ -38,15 +38,21 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
     let timer: NodeJS.Timeout;
     if (isRunning && timeLeft > 0) {
       timer = setInterval(() => {
-        setTimeLeft((prevTime) => prevTime - 1);
+        setTimeLeft((prevTime) => {
+          const newTime = prevTime - 1;
+          document.title = `${formatTime(newTime)}`;
+          return newTime;
+        });
       }, 1000);
     } else if (timeLeft === 0) {
       setIsRunning(false);
       alert("Pomodoro session completed!");
+      document.title = "Pomodoro Timer";
     }
 
     return () => {
       clearInterval(timer);
+      document.title = "Pomodoro Timer";
     };
   }, [isRunning, timeLeft]);
 
