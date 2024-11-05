@@ -269,7 +269,7 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
                   <FormLabel>Pensamientos y Sentimientos</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="¿Cómo te sentiste durante la sesión de estudio?"
+                      placeholder="Pensamientos negativos o desmotivadores que surgieron"
                       className="min-h-[100px]"
                       {...field}
                     />
@@ -305,7 +305,7 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
                   <FormLabel>Refuerzo positivo</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="¿Qué aprendí en esta sesión? ¿Qué hice bien?"
+                      placeholder="¿Qué aprendí en esta sesión? ¿Qué hice bien? ¿Qué fue lo mejor de esta sesión?"
                       className="min-h-[100px]"
                       {...field}
                     />
