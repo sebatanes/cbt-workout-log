@@ -48,6 +48,8 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
       setIsRunning(false);
       alert("Pomodoro session completed!");
       document.title = "Pomodoro Timer";
+    } else {
+      document.title = `${formatTime(timeLeft)}`;
     }
 
     return () => {
