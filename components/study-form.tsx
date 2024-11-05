@@ -40,21 +40,19 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
       timer = setInterval(() => {
         setTimeLeft((prevTime) => {
           const newTime = prevTime - 1;
-          document.title = `${formatTime(newTime)}`;
+          document.title = `Tiempo restante: ${formatTime(newTime)}`;
           return newTime;
         });
       }, 1000);
     } else if (timeLeft === 0) {
       setIsRunning(false);
       alert("Pomodoro session completed!");
-      document.title = "Pomodoro Timer";
-    } else {
-      document.title = `${formatTime(timeLeft)}`;
+      document.title = "Pomodoros Timer";
     }
 
     return () => {
       clearInterval(timer);
-      document.title = "Pomodoro Timer";
+      document.title = "Pomodoros Timer";
     };
   }, [isRunning, timeLeft]);
 
