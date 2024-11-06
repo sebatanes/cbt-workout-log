@@ -34,6 +34,7 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
   const [timer, setTimer] = useState(1500);
   const [isActive, setIsActive] = useState(false);
   const [customTime, setCustomTime] = useState(30);
+  const [pausedTime, setPausedTime] = useState(0);
 
   const form = useForm<StudyEntryFormData>({
     resolver: zodResolver(formSchema),
@@ -121,6 +122,12 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
 
   const stopTimer = () => {
     setIsActive(false);
+    setPausedTime(timer);
+  };
+
+  const continueTimer = () => {
+    setTimer(pausedTime);
+    setIsActive(true);
   };
 
   const resetTimer = () => {
@@ -334,11 +341,14 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
             <span className="ml-2">minutos</span>
           </div>
 
-          <Button onClick={startTimer} className="w-full mt-2">
+          <Button onClick={startTimer} className="w-full mt-2" disabled={isActive}>
             Iniciar
           </Button>
           <Button onClick={stopTimer} className="w-full mt-2" disabled={!isActive}>
             Detener
+          </Button>
+          <Button onClick={continueTimer} className="w-full mt-2" disabled={isActive || pausedTime === 0}>
+            Continuar
           </Button>
           <Button onClick={resetTimer} className="w-full mt-2">
             Reiniciar
