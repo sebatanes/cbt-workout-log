@@ -26,10 +26,11 @@ const formSchema = z.object({
 
 interface StudyFormProps {
   onSubmit: (data: StudyEntryFormData) => void;
+  onStrategies: () => void;
   initialData?: Partial<StudyEntryFormData>;
 }
 
-export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
+export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProps) {
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [timer, setTimer] = useState(1500);
   const [isActive, setIsActive] = useState(false);
@@ -98,7 +99,7 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
   const randomMessage = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
 
   useEffect(() => {
-    document.title = `${Math.floor(timer / 60)}:${(timer % 60).toString().padStart(2, '0')}`;
+    document.title = `Nombre de la App - ${Math.floor(timer / 60)}:${(timer % 60).toString().padStart(2, '0')}`;
     
     if (isActive && timer > 0) {
       const interval = setInterval(() => {
@@ -134,6 +135,8 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
     setIsActive(false);
     setTimer(customTime * 60);
   };
+
+
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -276,43 +279,42 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
                   </FormItem>
                 )}
               />
+              <div className="flex justify-between items-center">
 
+              </div>
               <FormField
                 control={form.control}
-                name="challenges"
+                name="strategies"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Desafíos Encontrados</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="¿Qué dificultades enfrentaste?"
-                        className="min-h-[100px]"
-                        {...field}
-                      />
-                    </FormControl>
+                    <div className="flex flex-col space-y-2">
+
+                      <FormLabel>Estrategias Utilizadas</FormLabel>
+
+                      <FormControl>
+                        <Textarea
+                          placeholder="¿Qué estrategias utilizaste en esta sesión?"
+                          className="min-h-[100px]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <span
+                        onClick={onStrategies}
+                        className="text-blue-500 cursor-pointer hover:underline text-sm font-medium"
+                      >
+                        Recordá repasar las estrategias
+                      </span>
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="solutions"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Refuerzo positivo</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="¿Qué aprendí en esta sesión? ¿Qué hice bien? ¿Qué fue lo mejor de esta sesión?"
-                        className="min-h-[100px]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" className="w-full">
+              <Button
+                type="submit"
+                className="w-full flex items-center justify-center transition duration-300 ease-in-out transform hover:bg-green-600 hover:scale-105 bg-gray-800 text-white font-semibold rounded-lg shadow-md p-4 border border-green-500"
+              >
+                <FaTrophy className="mr-2" />
                 Guardar Entrada
               </Button>
             </form>

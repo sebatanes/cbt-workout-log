@@ -35,16 +35,16 @@ export default function Home() {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4 mb-4 md:mt-0">
         <TabsList className="tabs-list grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
           <TabsTrigger value="form">Nueva Entrada</TabsTrigger>
-          <TabsTrigger value="strategies">Estrategias</TabsTrigger>
+          <TabsTrigger value="strategies">Diario de Estudio TCC</TabsTrigger>
           <TabsTrigger value="entries">Historial</TabsTrigger>
           <TabsTrigger value="timeline">Línea de Tiempo</TabsTrigger>
           <TabsTrigger value="stats">Analíticas</TabsTrigger>
         </TabsList>
         <TabsContent value="form" className="tabs-content mt-6">
-          <StudyForm onSubmit={(data) => {
-            addEntry(data);
-            setActiveTab("entries");
-          }} />
+          <StudyForm
+            onSubmit={(data) => { addEntry(data); setActiveTab("entries"); }}
+            onStrategies={() => setActiveTab("strategies")} // Aquí se pasa la función para cambiar a la pestaña de estrategias
+          />
         </TabsContent>
         <TabsContent value="entries" className="mt-6">
           <StudyEntries
