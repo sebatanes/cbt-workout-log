@@ -59,7 +59,7 @@ const strategiesContent = [
       },
       {
         title: "Festejar cada paso",
-        content: "Cada vez que logres algo, por más pequeño que sea, festejalo. Dale a tu cerebro la señal de que lo hiciste bien. ¡Pone un tema festivo, gritá ‘¡Vamos carajo!’ o date una palmada! Cada logro es un paso más en el camino, y celebrarlo mantiene alta tu motivación."
+        content: "Cada vez que logres algo, por más pequeño que sea, festejalo. Dale a tu cerebro la señal de que lo hiciste bien. Cada logro es un paso más en el camino, y celebrarlo mantiene alta tu motivación."
       },
       {
         title: "Crear una Playlist de Energía",
