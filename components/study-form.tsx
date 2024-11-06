@@ -33,7 +33,7 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [timer, setTimer] = useState(1500);
   const [isActive, setIsActive] = useState(false);
-  const [customTime, setCustomTime] = useState(25);
+  const [customTime, setCustomTime] = useState(30);
 
   const form = useForm<StudyEntryFormData>({
     resolver: zodResolver(formSchema),
