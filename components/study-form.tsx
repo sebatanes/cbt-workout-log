@@ -136,7 +136,7 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
   };
 
   return (
-    <div className="flex space-x-4">
+    <div className="flex justify-center items-center h-screen">
       <Card className="w-full max-w-2xl mx-auto">
         <CardHeader>
           <CardTitle>Registrar Sesión de Estudio</CardTitle>
@@ -317,42 +317,6 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
               </Button>
             </form>
           </Form>
-        </CardContent>
-      </Card>
-
-      <Card className="w-1/3 border-none">
-        <CardHeader>
-          <CardTitle>Temporizador</CardTitle>
-        </CardHeader>
-        <CardContent className="text-center">
-          <h2 className="text-4xl font-bold">
-            {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
-          </h2>
-          <p className="mt-2 text-lg">{isActive ? "En curso" : "Detenido"}</p>
-
-          <div className="flex items-center justify-center mt-4">
-            <input
-              type="number"
-              value={customTime}
-              onChange={e => setCustomTime(parseInt(e.target.value))}
-              min={1}
-              className="border rounded p-2 w-20 text-center"
-            />
-            <span className="ml-2">minutos</span>
-          </div>
-
-          <Button onClick={startTimer} className="w-full mt-2" disabled={isActive}>
-            Iniciar
-          </Button>
-          <Button onClick={stopTimer} className="w-full mt-2" disabled={!isActive}>
-            Detener
-          </Button>
-          <Button onClick={continueTimer} className="w-full mt-2" disabled={isActive || pausedTime === 0}>
-            Continuar
-          </Button>
-          <Button onClick={resetTimer} className="w-full mt-2">
-            Reiniciar
-          </Button>
         </CardContent>
       </Card>
     </div>

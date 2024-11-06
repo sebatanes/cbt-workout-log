@@ -13,7 +13,7 @@ interface HistoryViewProps {
 
 export function HistoryView({ entries }: HistoryViewProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortBy, setSortBy] = useState<"newest" | "oldest" | "duration" | "improvement">("newest");
+  const [sortBy, setSortBy] = useState<"newest" | "oldest" | "duration" | "improvement" | "mood_before" | "mood_after">("newest");
 
   const filteredAndSortedEntries = useMemo(() => {
     let filtered = entries.filter((entry) =>
@@ -31,6 +31,14 @@ export function HistoryView({ entries }: HistoryViewProps) {
       case "improvement":
         return filtered.sort((a, b) => 
           (b.mood_after - b.mood_before) - (a.mood_after - a.mood_before)
+        );
+      case "mood_before":
+        return filtered.sort((a, b) =>
+          (b.mood_before - a.mood_before)
+        );
+      case "mood_after":
+        return filtered.sort((a, b) =>
+          (b.mood_after - a.mood_after)
         );
       default: // newest
         return filtered.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
@@ -59,6 +67,8 @@ export function HistoryView({ entries }: HistoryViewProps) {
             <SelectItem value="oldest">Más Antiguos Primero</SelectItem>
             <SelectItem value="duration">Duración</SelectItem>
             <SelectItem value="improvement">Más Mejorados</SelectItem>
+            <SelectItem value="mood_before">Estado Antes (Alto a Bajo)</SelectItem>
+            <SelectItem value="mood_after">Estado Después (Alto a Bajo)</SelectItem>
           </SelectContent>
         </Select>
       </div>

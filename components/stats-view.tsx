@@ -11,6 +11,7 @@ import {
   YAxis,
   CartesianGrid,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 
 interface StatsViewProps {
@@ -31,9 +32,10 @@ export function StatsView({ entries }: StatsViewProps) {
     const moodData = entries
       .slice()
       .reverse()
-      .map((entry) => ({
+      .map((entry, index) => ({
         date: new Date(entry.created_at).toLocaleString(),
-        moodDifference: entry.mood_after - entry.mood_before,
+        moodStart: entry.mood_before,
+        moodEnd: entry.mood_after,
       }));
 
     return {
@@ -103,7 +105,9 @@ export function StatsView({ entries }: StatsViewProps) {
                 <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                 <XAxis dataKey="date" />
                 <YAxis />
-                <Bar dataKey="moodDifference" fill="#FFF" name="Diferencia de Ánimo" />
+                <Bar dataKey="moodStart" fill="rgba(255, 255, 255, 0.8)" name="Ánimo al Inicio" />
+                <Bar dataKey="moodEnd" fill="rgba(128, 0, 128, 0.8)" name="Ánimo al Final" />
+                <Legend />
               </BarChart>
             </ResponsiveContainer>
           </div>

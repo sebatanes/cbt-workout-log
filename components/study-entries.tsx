@@ -44,9 +44,21 @@ export function StudyEntries({ entries, onUpdate, onDelete }: StudyEntriesProps)
     }
   };
 
+  // Ordenar las entradas por fecha y hora
+  const sortedEntries = entries.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+  // Función para filtrar por estado de ánimo y diferencia de estado de ánimo
+  const filterEntries = (mood?: number, moodDifference?: number) => {
+    return sortedEntries.filter(entry => {
+      const difference = entry.mood_after - entry.mood_before;
+      return (!mood || entry.mood_before === mood || entry.mood_after === mood) &&
+        (!moodDifference || difference === moodDifference);
+    });
+  };
+
   return (
     <div className="space-y-4">
-      {entries.map((entry) => (
+      {filterEntries().map((entry) => (
         <Card key={entry.id}>
           <CardHeader>
             <div className="flex items-center justify-between">
