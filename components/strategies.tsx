@@ -38,7 +38,7 @@ const strategiesContent = [
   },
   {
     title: "Estrategias para Mantener la Diversión y Motivación",
-    buttonLabel: "¡A mover el cuerpo!",
+    buttonLabel: "Estrategias de Motivación",
     description: "Para seguir con ganas y sin perder el entusiasmo, hacé estas estrategias parte de tu día. ¡Vamos con todo!",
     items: [
       {
