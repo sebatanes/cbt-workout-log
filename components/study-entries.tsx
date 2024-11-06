@@ -85,6 +85,7 @@ export function StudyEntries({ entries, onUpdate, onDelete }: StudyEntriesProps)
                     <StudyForm
                       initialData={entry}
                       onSubmit={(data) => onUpdate(entry.id.toString(), data)}
+                      onStrategies={() => console.log()}
                     />
                   </DialogContent>
                 </Dialog>
