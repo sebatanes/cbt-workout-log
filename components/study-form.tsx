@@ -30,40 +30,10 @@ interface StudyFormProps {
 }
 
 export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
-  const [timeLeft, setTimeLeft] = useState(initialData?.duration ? initialData.duration * 60 : 30 * 60);
-  const [isRunning, setIsRunning] = useState(false);
   const [showCongratulations, setShowCongratulations] = useState(false);
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isRunning && timeLeft > 0) {
-      timer = setInterval(() => {
-        setTimeLeft((prevTime) => prevTime - 1);
-      }, 1000);
-    } else if (timeLeft === 0) {
-      setIsRunning(false);
-      alert("Pomodoro session completed!");
-    }
-
-    document.title = `Timer: ${formatTime(timeLeft)}`;
-
-    return () => clearInterval(timer);
-  }, [isRunning, timeLeft]);
-
-  const toggleTimer = () => {
-    setIsRunning((prev) => !prev);
-  };
-
-  const resetTimer = () => {
-    setIsRunning(false);
-    setTimeLeft(form.getValues("duration") * 60);
-  };
-
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
-  };
+  const [timer, setTimer] = useState(1500);
+  const [isActive, setIsActive] = useState(false);
+  const [customTime, setCustomTime] = useState(25);
 
   const form = useForm<StudyEntryFormData>({
     resolver: zodResolver(formSchema),
@@ -81,7 +51,6 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
 
   const handleDurationChange = (value: number) => {
     form.setValue("duration", value);
-    setTimeLeft(value * 60);
   };
 
   const handleSubmit = (data: StudyEntryFormData) => {
@@ -120,207 +89,262 @@ export function StudyForm({ onSubmit, initialData }: StudyFormProps) {
     "¡Cada logro, por pequeño que sea, cuenta!",
     "¡Tu compromiso es inspirador, sigue así!",
     "¡Estás haciendo un gran trabajo, no te detengas!",
-    "¡Tu esfuerzo y dedicación son dignos de reconocimiento!"
+    "Tu esfuerzo y dedicación son dignos de reconocimiento!"
   ];
 
 
 
   const randomMessage = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
 
+  useEffect(() => {
+    document.title = `${Math.floor(timer / 60)}:${(timer % 60).toString().padStart(2, '0')}`;
+    
+    if (isActive && timer > 0) {
+      const interval = setInterval(() => {
+        setTimer(prev => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else if (timer === 0) {
+      setIsActive(false);
+      setShowCongratulations(true);
+      setTimeout(() => {
+        setShowCongratulations(false);
+        onSubmit(form.getValues());
+      }, 5000);
+    }
+  }, [isActive, timer]);
+
+  const startTimer = () => {
+    setTimer(customTime * 60);
+    setIsActive(true);
+  };
+
+  const stopTimer = () => {
+    setIsActive(false);
+  };
+
+  const resetTimer = () => {
+    setIsActive(false);
+    setTimer(customTime * 60);
+  };
+
   return (
-    <Card className="w-full max-w-2xl mx-auto">
-      <CardHeader>
-        <CardTitle>Registrar Sesión de Estudio</CardTitle>
-        <CardDescription>Registra tu viaje de aprendizaje con insights cognitivos </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="flex justify-between items-center mb-4">
-          <span>Pomodoro Timer: {formatTime(timeLeft)}</span>
-          <div>
-            <Button onClick={toggleTimer} className="mr-2">
-              {isRunning ? "Pausar" : "Iniciar"}
-            </Button>
-            <Button onClick={resetTimer}>
-              Reiniciar
-            </Button>
-          </div>
-        </div>
-        {showCongratulations && (
-          <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-90 animate-fade-in-out">
-            <div className="bg-black rounded-lg shadow-lg p-8 text-center relative">
-              <div className="absolute top-0 left-0 right-0 -mt-6">
-                <FaTrophy className="mx-auto w-16 h-16 text-yellow-500" />
+    <div className="flex space-x-4">
+      <Card className="w-full max-w-2xl mx-auto">
+        <CardHeader>
+          <CardTitle>Registrar Sesión de Estudio</CardTitle>
+          <CardDescription>Registra tu viaje de aprendizaje con insights cognitivos </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {showCongratulations && (
+            <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-90 animate-fade-in-out">
+              <div className="bg-black rounded-lg shadow-lg p-8 text-center relative">
+                <div className="absolute top-0 left-0 right-0 -mt-6">
+                  <FaTrophy className="mx-auto w-16 h-16 text-yellow-500" />
+                </div>
+                <h1 className="text-5xl font-bold text-white">¡Felicidades!</h1>
+                <p className="text-lg text-gray-300 mt-2">{randomMessage}</p>
+                <h3 className="text-md text-gray-400 mt-4">¡Acordate de felicitarte en voz alta, vos te lo merecés!</h3>
               </div>
-              <h1 className="text-5xl font-bold text-white">¡Felicidades!</h1>
-              <p className="text-lg text-gray-300 mt-2">{randomMessage}</p>
-              <h3 className="text-md text-gray-400 mt-4">¡Acordate de felicitarte en voz alta, vos te lo merecés!</h3>
             </div>
+          )}
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="topic"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Tema de Estudio</FormLabel>
+                    <FormControl>
+                      <Input placeholder="p. ej., Hooks de React" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="duration"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Duración (minutos)</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={e => handleDurationChange(parseInt(e.target.value))}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="mood_before"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Estado de Ánimo Antes</FormLabel>
+                      <Select onValueChange={v => field.onChange(parseInt(v))} defaultValue={field.value.toString()}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Seleccionar estado de ánimo" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
+                            <SelectItem key={value} value={value.toString()}>
+                              {value === 1 ? "😔" :
+                                value === 2 ? "🙁" :
+                                  value === 3 ? "😐" :
+                                    value === 4 ? "🙂" :
+                                      value === 5 ? "😊" :
+                                        value === 6 ? "😃" :
+                                          value === 7 ? "😄" :
+                                            value === 8 ? "😁" :
+                                              value === 9 ? "😍" :
+                                                value === 10 ? "🥳" : "😐"} {value}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="mood_after"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Estado de Ánimo Después</FormLabel>
+                      <Select onValueChange={v => field.onChange(parseInt(v))} defaultValue={field.value.toString()}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Seleccionar estado de ánimo" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
+                            <SelectItem key={value} value={value.toString()}>
+                              {value === 1 ? "😔" :
+                                value === 2 ? "🙁" :
+                                  value === 3 ? "😐" :
+                                    value === 4 ? "🙂" :
+                                      value === 5 ? "😊" :
+                                        value === 6 ? "😃" :
+                                          value === 7 ? "😄" :
+                                            value === 8 ? "😁" :
+                                              value === 9 ? "😍" :
+                                                value === 10 ? "🥳" : "😐"} {value}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <FormField
+                control={form.control}
+                name="thoughts"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Pensamientos y Sentimientos</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Pensamientos negativos o desmotivadores que surgieron"
+                        className="min-h-[100px]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="challenges"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Desafíos Encontrados</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="¿Qué dificultades enfrentaste?"
+                        className="min-h-[100px]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="solutions"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Refuerzo positivo</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="¿Qué aprendí en esta sesión? ¿Qué hice bien? ¿Qué fue lo mejor de esta sesión?"
+                        className="min-h-[100px]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="w-full">
+                Guardar Entrada
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+
+      <Card className="w-1/3 border-none">
+        <CardHeader>
+          <CardTitle>Temporizador</CardTitle>
+        </CardHeader>
+        <CardContent className="text-center">
+          <h2 className="text-4xl font-bold">
+            {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
+          </h2>
+          <p className="mt-2 text-lg">{isActive ? "En curso" : "Detenido"}</p>
+
+          <div className="flex items-center justify-center mt-4">
+            <input
+              type="number"
+              value={customTime}
+              onChange={e => setCustomTime(parseInt(e.target.value))}
+              min={1}
+              className="border rounded p-2 w-20 text-center"
+            />
+            <span className="ml-2">minutos</span>
           </div>
-        )}
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="topic"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Tema de Estudio</FormLabel>
-                  <FormControl>
-                    <Input placeholder="p. ej., Hooks de React" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
 
-            <FormField
-              control={form.control}
-              name="duration"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Duración (minutos)</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      {...field}
-                      onChange={e => handleDurationChange(parseInt(e.target.value))}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="mood_before"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Estado de Ánimo Antes</FormLabel>
-                    <Select onValueChange={v => field.onChange(parseInt(v))} defaultValue={field.value.toString()}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Seleccionar estado de ánimo" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
-                          <SelectItem key={value} value={value.toString()}>
-                            {value === 1 ? "😔" :
-                              value === 2 ? "🙁" :
-                                value === 3 ? "😐" :
-                                  value === 4 ? "🙂" :
-                                    value === 5 ? "😊" :
-                                      value === 6 ? "😃" :
-                                        value === 7 ? "😄" :
-                                          value === 8 ? "😁" :
-                                            value === 9 ? "😍" :
-                                              value === 10 ? "🥳" : "😐"} {value}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="mood_after"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Estado de Ánimo Después</FormLabel>
-                    <Select onValueChange={v => field.onChange(parseInt(v))} defaultValue={field.value.toString()}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Seleccionar estado de ánimo" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
-                          <SelectItem key={value} value={value.toString()}>
-                            {value === 1 ? "😔" :
-                              value === 2 ? "🙁" :
-                                value === 3 ? "😐" :
-                                  value === 4 ? "🙂" :
-                                    value === 5 ? "😊" :
-                                      value === 6 ? "😃" :
-                                        value === 7 ? "😄" :
-                                          value === 8 ? "😁" :
-                                            value === 9 ? "😍" :
-                                              value === 10 ? "🥳" : "😐"} {value}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <FormField
-              control={form.control}
-              name="thoughts"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Pensamientos y Sentimientos</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Pensamientos negativos o desmotivadores que surgieron"
-                      className="min-h-[100px]"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="challenges"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Desafíos Encontrados</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="¿Qué dificultades enfrentaste?"
-                      className="min-h-[100px]"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="solutions"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Refuerzo positivo</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="¿Qué aprendí en esta sesión? ¿Qué hice bien? ¿Qué fue lo mejor de esta sesión?"
-                      className="min-h-[100px]"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <Button type="submit" className="w-full">
-              Guardar Entrada
-            </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+          <Button onClick={startTimer} className="w-full mt-2">
+            Iniciar
+          </Button>
+          <Button onClick={stopTimer} className="w-full mt-2" disabled={!isActive}>
+            Detener
+          </Button>
+          <Button onClick={resetTimer} className="w-full mt-2">
+            Reiniciar
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
