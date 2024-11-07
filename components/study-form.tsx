@@ -139,7 +139,7 @@ export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProp
 
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-start h-screen">
       <Card className="w-full max-w-2xl mx-auto">
         <CardHeader>
           <CardTitle>Registrar Sesión de Estudio</CardTitle>
