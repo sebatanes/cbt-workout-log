@@ -100,7 +100,7 @@ export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProp
 
   useEffect(() => {
     document.title = `Nombre de la App - ${Math.floor(timer / 60)}:${(timer % 60).toString().padStart(2, '0')}`;
-    
+
     if (isActive && timer > 0) {
       const interval = setInterval(() => {
         setTimer(prev => prev - 1);
@@ -284,18 +284,17 @@ export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProp
               </div>
               <FormField
                 control={form.control}
-                name="strategies"
+                name="challenges"
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex flex-col space-y-2">
-
                       <FormLabel>Estrategias Utilizadas</FormLabel>
-
                       <FormControl>
                         <Textarea
                           placeholder="¿Qué estrategias utilizaste en esta sesión?"
                           className="min-h-[100px]"
                           {...field}
+                          onChange={e => field.onChange(e.target.value.split(',').join(','))}
                         />
                       </FormControl>
                       <span
@@ -305,6 +304,25 @@ export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProp
                         Recordá repasar las estrategias
                       </span>
                     </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+
+              <FormField
+                control={form.control}
+                name="solutions"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Refuerzo positivo</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="¿Qué aprendí en esta sesión?"
+                        className="min-h-[100px]"
+                        {...field}
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
