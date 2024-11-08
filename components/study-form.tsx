@@ -99,7 +99,7 @@ export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProp
   const randomMessage = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
 
   useEffect(() => {
-    document.title = `Nombre de la App - ${Math.floor(timer / 60)}:${(timer % 60).toString().padStart(2, '0')}`;
+    document.title = 'App';
 
     if (isActive && timer > 0) {
       const interval = setInterval(() => {
@@ -143,7 +143,7 @@ export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProp
       <Card className="w-full max-w-2xl mx-auto">
         <CardHeader>
           <CardTitle>Registrar Sesión de Estudio</CardTitle>
-          <CardDescription>Registra tu viaje de aprendizaje con insights cognitivos </CardDescription>
+          <CardDescription>Documenta tu progreso en el aprendizaje y reflexiona sobre tus experiencias cognitivas.</CardDescription>
         </CardHeader>
         <CardContent>
           {showCongratulations && (

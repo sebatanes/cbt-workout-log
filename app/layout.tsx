@@ -7,7 +7,7 @@ import { Toaster } from '@/components/ui/sonner';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Diario de Estudio TCC',
+  title: 'Estrategias',
   description: 'Registro sesión a sesión',
 };
 

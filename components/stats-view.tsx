@@ -20,6 +20,26 @@ interface StatsViewProps {
 
 export function StatsView({ entries }: StatsViewProps) {
   const stats = useMemo(() => {
+    let points = 0;
+    let role = "Bronce"; // Rol por defecto
+
+    entries.forEach(entry => {
+      if (entry.mood_after > entry.mood_before) {
+        points += 10; // Ganas 10 puntos si mejoraste tu estado de ánimo
+      }
+      if (entry.mood_after > 9) {
+        points += 5; // Ganas 5 puntos si tu estado de ánimo fue más de 9
+      }
+    });
+
+    if (points > 200) {
+      role = "Diamante";
+    } else if (points >= 100) {
+      role = "Oro";
+    } else if (points >= 50) {
+      role = "Plata";
+    }
+
     const totalTime = entries.reduce((acc, entry) => acc + entry.duration, 0);
     const hours = Math.floor(totalTime / 60);
     const minutes = totalTime % 60;
@@ -43,6 +63,8 @@ export function StatsView({ entries }: StatsViewProps) {
       totalTime: { hours, minutes },
       avgMoodImprovement,
       moodData,
+      points,
+      role,
     };
   }, [entries]);
 
@@ -89,6 +111,39 @@ export function StatsView({ entries }: StatsViewProps) {
           <CardContent>
             <div className="text-2xl font-bold">
               {stats.avgMoodImprovement > 0 ? "📈 Mejorando" : "🎯 Sigue Adelante"}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Puntos Acumulados</CardTitle>
+            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold flex items-center">
+              <span>{stats.points}</span>
+              {stats.points >= 50 && <span className="ml-2 text-green-500">🏆</span>}
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Rol Actual</CardTitle>
+            {stats.role === "Diamante" && <Lightbulb className="h-4 w-4 text-yellow-500" />}
+            {stats.role === "Oro" && <Lightbulb className="h-4 w-4 text-yellow-400" />}
+            {stats.role === "Plata" && <Lightbulb className="h-4 w-4 text-gray-400" />}
+            {stats.role === "Bronce" && <Lightbulb className="h-4 w-4 text-brown-400" />}
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold flex items-center">
+              {stats.role === "Diamante" && <span className="mr-2 text-yellow-500">💎</span>}
+              {stats.role === "Oro" && <span className="mr-2 text-yellow-400">🥇</span>}
+              {stats.role === "Plata" && <span className="mr-2 text-gray-400">🥈</span>}
+              {stats.role === "Bronce" && <span className="mr-2 text-brown-400">🥉</span>}
+              <span>{stats.role}</span>
             </div>
           </CardContent>
         </Card>
