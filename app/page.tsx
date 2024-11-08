@@ -12,7 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Download, Upload } from "lucide-react";
 import { StudyEntryFormData } from "@/lib/types";
 import { Strategies } from "@/components/strategies";
-
+import { ThemeToggle } from '@/components/theme-toggle'; // Importa el ThemeToggle
+import { Goals } from "../components/goals";
 export default function Home() {
   const { entries, addEntry, updateEntry, deleteEntry, exportData } = useStudyEntries();
   const [activeTab, setActiveTab] = useState("form");
@@ -21,9 +22,10 @@ export default function Home() {
     <main className="container mx-auto py-6 px-4 space-y-8">
       <div className="flex flex-col md:flex-row items-center justify-between">
         <div className="text-center md:text-left">
-          <h1 className="text-4xl font-bold">Diario de Estudio TCC</h1>
+          <h1 className="text-4xl font-bold">Diario de Entrenamiento TCC</h1>
           <p className="text-muted-foreground">Registro sesión a sesión</p>
         </div>
+        <ThemeToggle /> 
         <div className="flex items-center gap-4 mt-4 md:mt-0">
           <Button variant="outline" onClick={exportData} className="hidden md:flex">
             <Download className="mr-2 h-4 w-4" />
@@ -36,6 +38,7 @@ export default function Home() {
         <TabsList className="tabs-list grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
           <TabsTrigger value="form">Nueva Entrada</TabsTrigger>
           <TabsTrigger value="strategies">Estrategias</TabsTrigger>
+          <TabsTrigger value="goals">Metas</TabsTrigger>
           <TabsTrigger value="entries">Historial</TabsTrigger>
           <TabsTrigger value="timeline">Línea de Tiempo</TabsTrigger>
           <TabsTrigger value="stats">Analíticas</TabsTrigger>
@@ -43,8 +46,14 @@ export default function Home() {
         <TabsContent value="form" className="tabs-content mt-6">
           <StudyForm
             onSubmit={(data) => { addEntry(data); setActiveTab("entries"); }}
-            onStrategies={() => setActiveTab("strategies")} // Aquí se pasa la función para cambiar a la pestaña de estrategias
+            onStrategies={() => setActiveTab("strategies")}
           />
+        </TabsContent>
+        <TabsContent value="strategies" className="mt-6">
+          <Strategies />
+        </TabsContent>
+        <TabsContent value="goals" className="mt-6">
+          <Goals />
         </TabsContent>
         <TabsContent value="entries" className="mt-6">
           <StudyEntries
@@ -52,10 +61,6 @@ export default function Home() {
             onUpdate={(id: string, data: Partial<StudyEntryFormData>) => updateEntry(Number(id), data)}
             onDelete={(id: string) => deleteEntry(Number(id))}
           />
-        </TabsContent>
-        
-        <TabsContent value="strategies" className="mt-6">
-          <Strategies />
         </TabsContent>
         <TabsContent value="timeline" className="mt-6">
           <HistoryView entries={entries} />

@@ -16,7 +16,7 @@ export function useStudyEntries() {
   useEffect(() => {
     const fetchEntries = async () => {
       const { data, error } = await supabase
-        .from('study_entries') // Cambia esto al nombre de tu tabla
+        .from('workout_entries') // Cambia esto al nombre de tu tabla
         .select('*');
 
       if (error) {
@@ -33,7 +33,7 @@ export function useStudyEntries() {
     console.log(newEntries)
     // Guarda las entradas en Supabase
     const { error } = await supabase
-      .from('study_entries') // Cambia esto al nombre de tu tabla
+      .from('workout_entries') // Cambia esto al nombre de tu tabla
       .upsert(newEntries);
     if (error) {
       console.error('Error saving entries:', error);
@@ -59,14 +59,14 @@ export function useStudyEntries() {
     console.log('newEntry', data)
     
     await saveEntries([newEntry, ...entries]);
-    toast.success('Study session logged successfully!');
+    toast.success('Workout session logged successfully!');
     return newEntry;
   };
 
   const updateEntry = async (id: number, data: Partial<StudyEntryFormData>) => {
     // Actualiza la entrada en Supabase
     const { error } = await supabase
-      .from('study_entries') // Cambia esto al nombre de tu tabla
+      .from('workout_entries') // Cambia esto al nombre de tu tabla
       .update(data) // Actualiza con los nuevos datos
       .eq('id', id); // Asegúrate de que 'id' es el nombre correcto de la columna
 
@@ -91,7 +91,7 @@ export function useStudyEntries() {
     console.log(id);
     // Elimina la entrada de Supabase
     const { error } = await supabase
-      .from('study_entries') // Cambia esto al nombre de tu tabla
+      .from('workout_entries') // Cambia esto al nombre de tu tabla
       .delete()
       .eq('id', id); // Asegúrate de que 'id' es el nombre correcto de la columna
 

@@ -8,110 +8,110 @@ const strategiesContent = [
   {
     title: "Estrategias de Manejo de Ansiedad",
     buttonLabel: "Estrategias Cognitivas",
-    description: "Frases para reducir la ansiedad al estudiar y descatastrofizar el no conseguir un trabajo:",
+    description: "Frases para reducir la ansiedad al ejercitar y desmitificar el miedo a no lograr tus metas:",
     items: [
       {
-        title: "Reducir ansiedad al estudiar",
+        title: "Reducir ansiedad al hacer ejercicio",
         content: [
-          "Es normal sentirme nervioso, pero estos nervios no definen mi capacidad para aprender.",
-          "Estoy avanzando a mi propio ritmo, y cada sesión de estudio es un paso adelante.",
-          "Si hoy no entiendo algo, está bien. Puedo volver a ello y aprenderlo poco a poco.",
-          "La perfección no es el objetivo, sino el progreso constante.",
-          "Puedo darme permiso para descansar y volver con más energía y claridad."
+          "Es normal sentir un poco de inseguridad, pero no define mi capacidad para progresar.",
+          "Voy avanzando a mi propio ritmo, y cada sesión es un paso adelante en mi camino hacia el bienestar.",
+          "Si hoy no puedo completar un ejercicio, está bien. Puedo intentarlo de nuevo en otro momento.",
+          "La perfección no es el objetivo, sino un progreso constante y disfrutable.",
+          "Puedo darme permiso para descansar y volver con más energía y enfoque."
         ]
       },
       {
-        title: "Hacer tai chi",
-        content: "Practicar tai chi para relajarme y mejorar mi concentración."
+        title: "Hacer estiramientos",
+        content: "Practicar estiramientos después de cada sesión para relajarme, evitar tensiones y mejorar mi flexibilidad."
       },
       {
-        title: "Descatastrofizar si no conseguís el trabajo deseado",
+        title: "Descatastrofizar si no cumples tus metas de inmediato",
         content: [
-          "No conseguir este trabajo no define mi valor ni mis habilidades.",
-          "Este trabajo es una oportunidad, pero hay muchas otras que también pueden enriquecer mi carrera.",
-          "Cada rechazo es solo un paso hacia una nueva oportunidad. Seguiré buscando y mejorando.",
-          "Tengo habilidades y cualidades que seguirán siendo valiosas, aunque no sea en esta empresa en particular.",
-          "La búsqueda de trabajo puede llevar tiempo, y eso está bien. Cada experiencia es una oportunidad para crecer."
+          "No lograr este objetivo de inmediato no define mi valor ni mis capacidades.",
+          "Este reto es una oportunidad, y cada paso me ayuda a ser mejor y más fuerte.",
+          "Cada vez que intento, aunque no logre la meta deseada, es un avance y un aprendizaje.",
+          "Mis cualidades y habilidades siguen siendo valiosas, aunque el progreso sea gradual.",
+          "Alcanzar objetivos puede tomar tiempo, y eso está bien. Cada experiencia es una oportunidad de crecimiento."
         ]
       }
     ]
   },
   {
-    title: "Estrategias para Mantener la Diversión y Motivación",
+    title: "Estrategias para Mantener la Motivación",
     buttonLabel: "Estrategias de Motivación",
-    description: "Para seguir con ganas y sin perder el entusiasmo, hacé estas estrategias parte de tu día. ¡Vamos con todo!",
+    description: "Para seguir motivado y con energía durante tus entrenamientos, incorpora estas estrategias a tu rutina. ¡A darlo todo!",
     items: [
       {
-        title: "Escuchar Música Disco",
-        content: "¡Poné ese temazo de disco y empezá a bailar! La música tiene el poder de elevar nuestro estado de ánimo. Escuchá algo de Donna Summer o Bee Gees, y vas a ver cómo la energía se te dispara. ¡Es como una inyección de adrenalina positiva!"
+        title: "Escuchar Música Energética",
+        content: "Ponte una playlist de música que te motive, con temas que te impulsen a moverte. La música puede elevar tu energía y ánimo, haciéndote disfrutar más de la actividad física."
       },
       {
         title: "Mover el cuerpo, sin excusas",
-        content: "Moverte es fundamental. No importa si no tenés tiempo para un gimnasio. Con una caminata de 10 minutos o unos estiramientos, vas a activar la mente. El cuerpo y la mente están conectados: cuando te movés, la motivación aumenta y el estrés disminuye."
+        content: "No necesitas un gimnasio para activar el cuerpo. Una caminata rápida o algunos estiramientos pueden hacer una gran diferencia. Cuando te mueves, tu motivación aumenta y el estrés disminuye."
       },
       {
-        title: "Sonreír",
-        content: "Aunque no tengas ganas, sonreí. Sonreír te ayuda a liberar endorfinas, las hormonas de la felicidad. Incluso cuando no estás de ánimo, ponerte una sonrisa te cambia el día. ¡Es la forma más fácil de subir tu energía!"
+        title: "Sonreír durante el ejercicio",
+        content: "Sonreír, incluso durante un ejercicio intenso, ayuda a liberar endorfinas, lo que mejora tu ánimo. La sonrisa puede cambiar tu día y hacer que la sesión sea más disfrutable."
       },
       {
-        title: "Tomar agua constantemente",
-        content: "No subestimes el poder de tomar agua. El cuerpo necesita estar hidratado para rendir al máximo. Si te olvidaste de tomar agua, hacelo ahora mismo. Una buena hidratación mejora la concentración y la energía. Además, ¡el agua es vida!"
+        title: "Mantente hidratado",
+        content: "No subestimes la importancia de la hidratación. Un cuerpo bien hidratado rinde mejor, tanto en energía como en concentración. ¡Recuerda tomar agua antes, durante y después del ejercicio!"
       },
       {
-        title: "Festejar cada paso",
-        content: "Cada vez que logres algo, por más pequeño que sea, festejalo. Dale a tu cerebro la señal de que lo hiciste bien. Cada logro es un paso más en el camino, y celebrarlo mantiene alta tu motivación."
+        title: "Celebrar cada avance",
+        content: "Cada logro, por pequeño que sea, es importante. Celebra tus avances para que tu cerebro reconozca que estás en el camino correcto. ¡Cada paso cuenta!"
       },
       {
-        title: "Crear una Playlist de Energía",
-        content: "Hacé tu propia lista de reproducción con canciones que te suban el ánimo. Escucharla mientras trabajás o estudias te mantiene conectado con tu energía interna."
+        title: "Crear una Playlist Energética",
+        content: "Crea una lista de reproducción con canciones que te motiven. Escucharla mientras te ejercitas te ayuda a mantener un nivel alto de energía."
       },
       {
-        title: "Cambiá tu estado de ánimo al instante",
-        content: "¡Cambiá tu estado de ánimo ahora mismo! Si estás bajoneado, movete, sonreí, pensá en algo que te guste o simplemente hacé un cambio físico. Parate, sacudí los brazos, ponete más recto."
+        title: "Cambiar tu estado de ánimo rápidamente",
+        content: "Si te sientes desmotivado, cambia tu postura, sonríe o simplemente comienza con un movimiento fácil. Estos pequeños cambios físicos pueden ayudarte a reactivar tu energía."
       },
       {
-        title: "Hablarte de forma positiva",
-        content: "Hablarte a vos mismo como si fueras tu propio entrenador. Decí ‘¡Vamos, lo podés hacer!’ o ‘¡Qué bien lo estoy haciendo!’. Las palabras que usás para hablarte a vos mismo tienen el poder de cambiar tu actitud y energía."
+        title: "Hablarte positivamente",
+        content: "Habla contigo mismo como un entrenador: ‘¡Puedo hacerlo!’ o ‘¡Estoy avanzando bien!’. Las palabras que usas para hablarte a ti mismo tienen el poder de influir en tu actitud."
       },
       {
         title: "Visualizar el éxito",
-        content: "Cerrá los ojos e imaginate disfrutando lo que querés aprender. No solo pensés en el futuro, sentí esa victoria, experimentá esa emoción de éxito. Lo que tu mente ve y siente, tu cuerpo lo va a hacer realidad."
+        content: "Cierra los ojos y visualízate logrando tus objetivos. Siéntelo como una realidad, y tu cuerpo estará más dispuesto a seguir el camino hacia esa meta."
       },
       {
         title: "Respiración profunda",
-        content: "Cuando estés estresado o agotado, hacé una pausa, respirá profundamente y sentí cómo se despeja tu mente. Respirar profundamente te ayuda a resetear tu cuerpo y volver a enfocarte. ¡Probalo ahora mismo!"
+        content: "Cuando sientas cansancio o tensión, haz una pausa y respira profundamente. La respiración profunda ayuda a despejar tu mente y renovar tu energía."
       },
     ]
   },
   {
-    title: "Estrategias de Aprendizaje",
-    buttonLabel: "Cursos de Udemy",
-    description: "Si tenés que estar mirando el video y escribiendo código al mismo tiempo, podés probar una mezcla de <em>active recall</em> y \"aprender haciendo\" para mantener la cabeza ocupada y recordar mejor lo que vas viendo:",
+    title: "Estrategias de Aprendizaje y Mejora",
+    buttonLabel: "Consejos para Progresar",
+    description: "Prueba estas estrategias para mejorar tu enfoque y disfrutar el proceso mientras aprendes nuevas habilidades físicas:",
     items: [
       {
-        title: "Dividilo en partes y alterná",
-        content: "Mirá una sección corta del video (unos 3 a 5 minutos), pausá, y tratá de aplicar lo que aprendiste escribiendo el código sin ver la solución en pantalla. Esto te obliga a recordar, en lugar de mirar el video de manera pasiva."
+        title: "Divídelo en partes manejables",
+        content: "Divide tu entrenamiento en segmentos. Concéntrate en una habilidad o movimiento a la vez. Esto te ayuda a no sentirte abrumado y facilita la constancia."
       },
       {
-        title: "Hacé pausas para practicar",
-        content: "Cada vez que el instructor explique algo importante, pausá el video y escribí en un archivo de notas una pregunta sobre ese concepto (por ejemplo, \"¿Cómo uso el useState?\"). Después, intentá escribir el código sin mirar el video de nuevo. Así estás activamente recordando en vez de solo consumir la info."
+        title: "Haz pausas para revisar tu técnica",
+        content: "Revisa la técnica de tus ejercicios, pausando para analizar lo que estás haciendo bien y en qué puedes mejorar. Esto ayuda a evitar lesiones y a mejorar con el tiempo."
       },
       {
-        title: "Probá el método \"mirá pero no toques\"",
-        content: "Observá al instructor escribir el código sin hacer nada en tu compu. Prestá atención a la lógica y a los pasos. Después, sin volver atrás en el video, tratá de escribir vos mismo el código desde el principio, solo usando lo que te acordás. Es una manera de ejercitar la memoria también."
+        title: "Usa la observación sin imitación",
+        content: "Mira a alguien que realice bien el ejercicio y observa su técnica. Luego, intenta imitarlo en tu propio cuerpo, prestando atención a cada movimiento."
       },
       {
-        title: "Inventá ejemplos propios",
-        content: "Si hay algo que te parece especialmente aburrido o difícil, inventá un ejemplo rápido y probalo en código, aunque sea algo sencillo y fuera del curso. Le das tu toque personal y hace que el contenido tenga un poco más de sentido."
+        title: "Crea tus propias variaciones",
+        content: "Si un ejercicio es monótono, personalízalo. Modifica pequeños detalles que lo hagan más desafiante o divertido, adaptándolo a tus gustos y estilo."
       },
       {
-        title: "Escribí un mini resumen después de cada módulo",
-        content: "Cuando termines una parte, intentá explicarlo en un par de oraciones. Así reforzás lo que aprendiste y además te queda un material de repaso rápido para cuando necesites."
+        title: "Escribe un mini resumen de tus avances",
+        content: "Al finalizar, reflexiona sobre lo que lograste en la sesión. Escribe una frase o dos sobre tu experiencia, ayudándote a hacer un seguimiento y a mantenerte motivado."
       }
     ]
   },
-
 ];
+
 
 export const Strategies: React.FC = () => {
   const [openStates, setOpenStates] = useState<boolean[]>(new Array(strategiesContent.length).fill(false));

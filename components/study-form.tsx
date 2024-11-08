@@ -140,10 +140,10 @@ export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProp
 
   return (
     <div className="flex justify-center items-start h-screen">
-      <Card className="w-full max-w-2xl mx-auto">
+      <Card className="w-full max-w-2xl mx-auto shadow-lg shadow-white">
         <CardHeader>
-          <CardTitle>Registrar Sesión de Estudio</CardTitle>
-          <CardDescription>Documenta tu progreso en el aprendizaje y reflexiona sobre tus experiencias cognitivas.</CardDescription>
+          <CardTitle>Registrar Sesión de Entrenamiento</CardTitle>
+          <CardDescription>Documenta tu progreso en el entrenamiento y reflexiona sobre tus experiencias.</CardDescription>
         </CardHeader>
         <CardContent>
           {showCongratulations && (
@@ -154,7 +154,7 @@ export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProp
                 </div>
                 <h1 className="text-5xl font-bold text-white">¡Felicidades!</h1>
                 <p className="text-lg text-gray-300 mt-2">{randomMessage}</p>
-                <h3 className="text-md text-gray-400 mt-4">¡Acordate de felicitarte en voz alta, vos te lo merecés!</h3>
+                <h3 className="text-md text-gray-400 mt-4">¡Recuerda celebrar tus logros, te lo mereces!</h3>
               </div>
             </div>
           )}
@@ -165,7 +165,7 @@ export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProp
                 name="topic"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Tema de Estudio</FormLabel>
+                    <FormLabel>Tema de Entrenamiento</FormLabel>
                     <FormControl>
                       <Input placeholder="p. ej., Hooks de React" {...field} />
                     </FormControl>
@@ -198,7 +198,7 @@ export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProp
                   name="mood_before"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Estado de Ánimo Antes</FormLabel>
+                      <FormLabel>Estado de Ánimo Antes del Entrenamiento</FormLabel>
                       <Select onValueChange={v => field.onChange(parseInt(v))} defaultValue={field.value.toString()}>
                         <FormControl>
                           <SelectTrigger>
@@ -232,7 +232,7 @@ export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProp
                   name="mood_after"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Estado de Ánimo Después</FormLabel>
+                      <FormLabel>Estado de Ánimo Después del Entrenamiento</FormLabel>
                       <Select onValueChange={v => field.onChange(parseInt(v))} defaultValue={field.value.toString()}>
                         <FormControl>
                           <SelectTrigger>
@@ -288,7 +288,7 @@ export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProp
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex flex-col space-y-2">
-                      <FormLabel>Estrategias Utilizadas</FormLabel>
+                      <FormLabel>Estrategias Utilizadas en el Entrenamiento</FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder="¿Qué estrategias utilizaste en esta sesión?"
@@ -315,7 +315,7 @@ export function StudyForm({ onSubmit, onStrategies, initialData }: StudyFormProp
                 name="solutions"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Refuerzo positivo</FormLabel>
+                    <FormLabel>Refuerzo Positivo</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="¿Qué aprendí en esta sesión?"
